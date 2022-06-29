@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../images/favicon.ico" type="image/ico" />
+
+    <title>BANK SAMPAH BUMI INSPIRASI</title>
+
+    <!-- Bootstrap -->
+    <link th:href="@{../vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link th:href="@{../vendors/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+    <!-- NProgress -->
+    <link th:href="@{../vendors/nprogress/nprogress.css}" rel="stylesheet">
+    <!-- iCheck -->
+    <link th:href="@{../vendors/iCheck/skins/flat/green.css}" rel="stylesheet">
+
+    <!-- bootstrap-progressbar -->
+    <link th:href="@{../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css}" rel="stylesheet">
+    <!-- JQVMap -->
+    <link th:href="@{../vendors/jqvmap/dist/jqvmap.min.css}" rel="stylesheet" />
+    <!-- bootstrap-daterangepicker -->
+    <link th:href="@{../vendors/bootstrap-daterangepicker/daterangepicker.css}" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link th:href="@{../build/css/custom.min.css}" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{../css/my-login.css}">
+
+</head>
+
+<body class="nav-md">
+
+<div class="container body" sec:authorize="isAuthenticated()">
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view mt-5">
+                <div class="navbar nav_title" style="border: 0;">
+                    <img class="rounded mx-auto d-block" src="../../images/favicon.ico" width="90" height="100" alt="">
+                </div>
+
+                <div class="clearfix"></div>
+
+                <br /><br /><br />
+                <!-- sidebar menu -->
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                    <div class="menu_section" sec:authorize="hasAnyAuthority('KARYAWAN')">
+                        <h3>Dashboard</h3>
+                        <ul class="nav side-menu" style="font-size: 14px">
+                            <li><a th:href="@{/}"><i class="fa fa-home fa-4x"></i>  <span>HOME</span></a>
+                            </li>
+                            <li>
+                                <a th:href="@{/KARYAWAN/monitoring}">
+                                    <i class="fa fa-book fa-2x"></i><span>KELOLA CUTI</span>
+                                </a>
+                            </li>
+                            <li><a th:href="@{/KARYAWAN/pengajuan}"><i class="fa fa-clone fa-2x"></i> <span>PENGAJUAN CUTI</span></a>
+                            <li><a th:href="@{/KARYAWAN/libur}"><i class="fa fa-calendar-plus-o fa-2x"></i> <span>HARI LIBUR</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- top navigation -->
+    <div class="top_nav">
+        <div class="nav_menu">
+            <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+            <nav class="nav navbar-nav">
+                <ul class=" navbar-right">
+                    <li class="nav-item dropdown open" style="padding-left: 15px;">
+                        <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true"
+                           id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                            <img src="../images/img.jpg" alt="">
+                            <span th:inline="text">[[${#httpServletRequest.remoteUser}]]</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
+                            <div sec:authorize="hasAnyAuthority('KARYAWAN')">
+                                <a class="dropdown-item" th:href="@{/KARYAWAN/setting}">Change Password</a>
+                            </div>
+
+                            <a class="dropdown-item" th:href="@{/logout}"><i class="fa fa-sign-out pull-right"></i>
+                                Log Out</a>
+                        </div>
+                    </li>
+                </ul>
+                </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- /top navigation -->
+
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="page-title">
+                <div class="title_left">
+                    <h3><small>KELOLA CUTI</small></h3>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 ">
+                    <div class="x_panel">
+                        <div class="x_title">
+
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card-box table-responsive">
+                                        <table id="datatable" class="table table-striped table-bordered text-center" style="width:100%">
+                                            <thead>
+                                            <tr>
+                                                <th>NO</th>
+                                                <th>NAMA</th>
+                                                <th>TANGGAL CUTI</th>
+                                                <th>LAMA</th>
+                                                <th>STATUS</th>
+                                                <th>ACTION</th>
+                                            </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            <th:block th:each="data,no:${pengajuan}">
+                                                <tr>
+                                                    <td>[[${no.count}]]</td>
+                                                    <td>[[${data.pengajuanCuti.employee.nama}]]</td>
+                                                    <td th:text="${#dates.format(data.tanggal, 'dd-MMM-yyyy')}"></td>
+                                                    <td>[[${data.pengajuanCuti.lama_cuti}]] hari</td>
+                                                    <td>[[${data.pengajuanCuti.statusCuti.status_cuti}]]</td>
+                                                    <td>
+                                                        <div th:if="${data.pengajuanCuti.statusCuti.cuti_id==1}">
+                                                            <div class="tolarah">
+                                                                <span class="arah">Send</span>
+                                                                <a class="fa fa-paper-plane fa-2x" aria-hidden="true" th:attr="onclick=|Send('${data.getPengajuanCuti().getPengajuan_id()}')|"></a>
+                                                            </div>
+                                                            <div class="tolarah">
+                                                                <span class="arah">Edit</span>
+                                                                <a class="fa fa-pencil-square-o fa-2x" aria-hidden="true" th:href="@{'/KARYAWAN/ubah/'+${data.getPengajuanCuti().getPengajuan_id()}}"></a>
+                                                            </div>
+                                                            <div class="tolarah">
+                                                                <span class="arah">Hapus</span>
+                                                                <a class="fa fa-trash-o fa-2x" aria-hidden="true" th:attr="onclick=|Confirm('${data.getPengajuanCuti().getPengajuan_id()}')|"></a>
+                                                            </div>
+                                                            <div class="tolarah">
+                                                                <span class="arah">Detail</span>
+                                                                <a class="fa fa-envelope-o fa-2x" th:href="@{'/KARYAWAN/detail/'+${data.detail_pengajuan_cuti_id}}"></a>
+                                                            </div>
+                                                        </div>
+                                                        <div th:if="${data.pengajuanCuti.statusCuti.cuti_id==2}">
+                                                            <div class="tolarah">
+                                                                <span class="arah">Cancel</span>
+                                                                <a class="fa fa-reply fa-2x" aria-hidden="true" th:attr="onclick=|Cancel('${data.getPengajuanCuti().getPengajuan_id()}')|"></a>
+                                                            </div>
+                                                            <div class="tolarah">
+                                                                <span class="arah">Detail</span>
+                                                                <a class="fa fa-envelope-o fa-2x" th:href="@{'/KARYAWAN/detail/'+${data.detail_pengajuan_cuti_id}}"></a>
+                                                            </div>
+                                                        </div>
+                                                        <div th:if="${data.pengajuanCuti.statusCuti.cuti_id!=1} AND ${data.pengajuanCuti.statusCuti.cuti_id!=2}">
+                                                            <div class="tolarah">
+                                                                <span class="arah">Detail</span>
+                                                                <a class="fa fa-envelope-o fa-2x" th:href="@{'/KARYAWAN/detail/'+${data.detail_pengajuan_cuti_id}}"></a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </th:block>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- /footer content -->
+
+        <!-- jQuery -->
+        <script src="../vendors/jquery/dist/jquery.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- FastClick -->
+        <script src="../vendors/fastclick/lib/fastclick.js"></script>
+        <!-- NProgress -->
+        <script src="../vendors/nprogress/nprogress.js"></script>
+        <!-- iCheck -->
+        <script src="../vendors/iCheck/icheck.min.js"></script>
+        <!-- Datatables -->
+        <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+        <script src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+        <script src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+        <script src="../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+        <script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+        <script src="../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+        <script src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+        <script src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+        <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+        <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+        <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+        <script src="../vendors/jszip/dist/jszip.min.js"></script>
+        <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
+        <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+
+        <!-- Custom Theme Scripts -->
+        <script src="../build/js/custom.min.js"></script>
+
+        <script src="../../dist/sweetalert2.all.min.js"></script>
+
+        <script>
+            function Send(id){
+                Swal.fire({
+                    title: 'Anda yakin?',
+                    text:'Ingin Ajukan Cuti',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = 'http://localhost:8082/KARYAWAN/send/'+id;
+                        Swal.fire(
+                            'Terkirim!',
+                            'Pengajuan Terkirim.',
+                            'success'
+                        )
+                    }
+                })
+            }
+
+            function Cancel(id){
+                Swal.fire({
+                    title: 'Anda yakin?',
+                    text:'Ingin Batalkan Cuti',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = 'http://localhost:8082/KARYAWAN/cancel/'+id;
+                        Swal.fire(
+                            'Berhasil!',
+                            'Pengajuan Dibatalkan.',
+                            'success'
+                        )
+                    }
+                })
+            }
+
+            function Confirm(id){
+                Swal.fire({
+                    title: 'Anda yakin?',
+                    text:'Ingin Menghapus Data Ini',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        window.location.href = 'http://localhost:8082/KARYAWAN/hapus/'+id;
+                        Swal.fire(
+                            'Terhapus!',
+                            'Data Karyawan Terhapus.',
+                            'success'
+                        )
+                    }
+                })
+            }
+
+        </script>
+
+</body>
+</html>

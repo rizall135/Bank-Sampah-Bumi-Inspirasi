@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Basic Page Info -->
+    <meta charset="utf-8">
+    <title>BANK BUMI INSPIRASI</title>
+
+    <!-- Site favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../vendors/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../vendors/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../vendors/images/favicon-16x16.png">
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="../vendors/styles/core.css">
+    <link rel="stylesheet" type="text/css" href="../vendors/styles/icon-font.min.css">
+    <link rel="stylesheet" type="text/css" href="../src/plugins/datatables/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="../src/plugins/datatables/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="../vendors/styles/style.css">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-119386393-1');
+    </script>
+</head>
+<body>
+<div class="pre-loader">
+    <div class="pre-loader-box">
+        <div class="loader-logo"><img src="../vendors/images/logo-bumi-inspirasi.svg" alt=""></div>
+        <div class='loader-progress' id="progress_div">
+            <div class='bar' id='bar1'></div>
+        </div>
+        <div class='percent' id='percent1'>0%</div>
+        <div class="loading-text">
+            Loading...
+        </div>
+    </div>
+</div>
+
+<div class="header">
+    <div class="header-left">
+        <div class="menu-icon dw dw-menu"></div>
+        <div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
+        <div class="header-search">
+            <form>
+                <div class="form-group mb-0">
+                    <i class="dw dw-search2 search-icon"></i>
+                    <input type="text" class="form-control search-input" placeholder="Search Here">
+                    <div class="dropdown">
+                        <a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
+                            <i class="ion-arrow-down-c"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">From</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm form-control-line" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">To</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm form-control-line" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">Subject</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm form-control-line" type="text">
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <button class="btn btn-primary">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="header-right">
+        <div class="dashboard-setting user-notification">
+            <div class="dropdown">
+                <a class="dropdown-toggle no-arrow" href="javascript:;" data-toggle="right-sidebar">
+                    <i class="dw dw-settings2"></i>
+                </a>
+            </div>
+        </div>
+        <div class="user-info-dropdown">
+            <div class="dropdown">
+                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+						<span class="user-icon">
+							<img src="../vendors/images/photo1.jpg" alt="">
+						</span>
+                    <span class="user-name" th:inline="text">[[${#httpServletRequest.remoteUser}]]</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                    <a class="dropdown-item" href="profile.html"><i class="dw dw-user1"></i> Profile</a>
+                    <a class="dropdown-item" href="profile.html"><i class="dw dw-settings2"></i> Setting</a>
+                    <a class="dropdown-item" href="faq.html"><i class="dw dw-help"></i> Help</a>
+                    <a class="dropdown-item" href="login.html"><i class="dw dw-logout"></i> Log Out</a>
+                </div>
+            </div>
+        </div>
+        <div class="github-link">
+            <h1>&nbsp;</h1>
+        </div>
+    </div>
+</div>
+
+<div class="right-sidebar">
+    <div class="sidebar-title">
+        <h3 class="weight-600 font-16 text-blue">
+            Layout Settings
+            <span class="btn-block font-weight-400 font-12">User Interface Settings</span>
+        </h3>
+        <div class="close-sidebar" data-toggle="right-sidebar-close">
+            <i class="icon-copy ion-close-round"></i>
+        </div>
+    </div>
+    <div class="right-sidebar-body customscroll">
+        <div class="right-sidebar-body-content">
+            <h4 class="weight-600 font-18 pb-10">Header Background</h4>
+            <div class="sidebar-btn-group pb-30 mb-10">
+                <a href="javascript:void(0);" class="btn btn-outline-primary header-white active">White</a>
+                <a href="javascript:void(0);" class="btn btn-outline-primary header-dark">Dark</a>
+            </div>
+
+            <h4 class="weight-600 font-18 pb-10">Sidebar Background</h4>
+            <div class="sidebar-btn-group pb-30 mb-10">
+                <a href="javascript:void(0);" class="btn btn-outline-primary sidebar-light ">White</a>
+                <a href="javascript:void(0);" class="btn btn-outline-primary sidebar-dark active">Dark</a>
+            </div>
+
+            <h4 class="weight-600 font-18 pb-10">Menu Dropdown Icon</h4>
+            <div class="sidebar-radio-group pb-10 mb-10">
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="sidebaricon-1" name="menu-dropdown-icon" class="custom-control-input" value="icon-style-1" checked="">
+                    <label class="custom-control-label" for="sidebaricon-1"><i class="fa fa-angle-down"></i></label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="sidebaricon-2" name="menu-dropdown-icon" class="custom-control-input" value="icon-style-2">
+                    <label class="custom-control-label" for="sidebaricon-2"><i class="ion-plus-round"></i></label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="sidebaricon-3" name="menu-dropdown-icon" class="custom-control-input" value="icon-style-3">
+                    <label class="custom-control-label" for="sidebaricon-3"><i class="fa fa-angle-double-right"></i></label>
+                </div>
+            </div>
+
+            <h4 class="weight-600 font-18 pb-10">Menu List Icon</h4>
+            <div class="sidebar-radio-group pb-30 mb-10">
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="sidebariconlist-1" name="menu-list-icon" class="custom-control-input" value="icon-list-style-1" checked="">
+                    <label class="custom-control-label" for="sidebariconlist-1"><i class="ion-minus-round"></i></label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="sidebariconlist-2" name="menu-list-icon" class="custom-control-input" value="icon-list-style-2">
+                    <label class="custom-control-label" for="sidebariconlist-2"><i class="fa fa-circle-o" aria-hidden="true"></i></label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="sidebariconlist-3" name="menu-list-icon" class="custom-control-input" value="icon-list-style-3">
+                    <label class="custom-control-label" for="sidebariconlist-3"><i class="dw dw-check"></i></label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="sidebariconlist-4" name="menu-list-icon" class="custom-control-input" value="icon-list-style-4" checked="">
+                    <label class="custom-control-label" for="sidebariconlist-4"><i class="icon-copy dw dw-next-2"></i></label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="sidebariconlist-5" name="menu-list-icon" class="custom-control-input" value="icon-list-style-5">
+                    <label class="custom-control-label" for="sidebariconlist-5"><i class="dw dw-fast-forward-1"></i></label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="sidebariconlist-6" name="menu-list-icon" class="custom-control-input" value="icon-list-style-6">
+                    <label class="custom-control-label" for="sidebariconlist-6"><i class="dw dw-next"></i></label>
+                </div>
+            </div>
+
+            <div class="reset-options pt-30 text-center">
+                <button class="btn btn-danger" id="reset-settings">Reset Settings</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="left-side-bar">
+    <div class="brand-logo">
+        <a href="index.html">
+            <img src="../vendors/images/logo-bsi.svg" alt="">
+        </a>
+        <div class="close-sidebar" data-toggle="left-sidebar-close">
+            <i class="ion-close-round"></i>
+        </div>
+    </div>
+    <div class="menu-block customscroll">
+        <div class="sidebar-menu">
+            <ul id="accordion-menu">
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon dw dw-house-1"></span><span class="mtext">Home</span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="index.html">Dashboard style 1</a></li>
+                        <li><a href="index2.html">Dashboard style 2</a></li>
+                        <li><a href="index3.html">Dashboard style 3</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon dw dw-edit2"></span><span class="mtext">Transaksi</span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a th:href="@{/pegawai/historytambahview}" href="form-basic.html">Tambah Saldo Nasabah</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon dw dw-library"></span><span class="mtext">Data</span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a th:href="@{/pegawai/nasabahview}">Nasabah</a></li>
+                        <li><a th:href="@{/pegawai/sampahview}">Sampah</a></li>
+                        <li><a th:href="@{/pegawai/kategorisampahview}">Kategori Sampah</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="calendar.html" class="dropdown-toggle no-arrow">
+                        <span class="micon dw dw-calendar1"></span><span class="mtext">Kegiatan</span>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="micon dw dw-analytics-21"></span><span class="mtext">Laporan</span>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="highchart.html">Highchart</a></li>
+                        <li><a href="knob-chart.html">jQuery Knob</a></li>
+                        <li><a href="jvectormap.html">jvectormap</a></li>
+                        <li><a href="apexcharts.html">Apexcharts</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="https://dropways.github.io/deskapp-free-single-page-website-template/" target="_blank" class="dropdown-toggle no-arrow">
+                        <span class="micon dw dw-paper-plane1"></span>
+                        <span class="mtext">Jemput Sampah</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="mobile-menu-overlay"></div>
+
+<div class="main-container">
+    <div class="pd-ltr-20">
+        <div class="card-box pd-20 height-100-p mb-30">
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    <img src="../vendors/images/foto_studio.jpg" alt="">
+                </div>
+                <div class="col-md-8">
+                    <h4 class="font-20 weight-500 mb-10 text-capitalize">
+                        Bank Sampah <div class="weight-600 font-30 text-blue">Bumi Inspirasi</div>
+                    </h4>
+                    <p class="font-18 max-width-600"> memiliki Visi Menjadi Bank Sampah Syariah dengan ragam layanan edukasi sesuai kebutuhan masyarakat untuk mewujudkan keluarga ramah lingkungan dan kehidupan yang lebih bermakna</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-3 mb-30">
+                <div class="card-box height-100-p widget-style1">
+                    <div class="d-flex flex-wrap align-items-center">
+                        <div class="progress-data">
+                            <div id="chart"></div>
+                        </div>
+                        <div class="widget-data">
+                            <div class="h4 mb-0" th:text="${total}"></div>
+                            <div class="weight-600 font-14">Nasabah</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 mb-30">
+                <div class="card-box height-100-p widget-style1">
+                    <div class="d-flex flex-wrap align-items-center">
+                        <div class="progress-data">
+                            <div id="chart2"></div>
+                        </div>
+                        <div class="widget-data">
+                            <div class="h4 mb-0">400</div>
+                            <div class="weight-600 font-14">Transaksi</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 mb-30">
+                <div class="card-box height-100-p widget-style1">
+                    <div class="d-flex flex-wrap align-items-center">
+                        <div class="progress-data">
+                            <div id="chart3"></div>
+                        </div>
+                        <div class="widget-data">
+                            <div class="h4 mb-0">350</div>
+                            <div class="weight-600 font-14">Total Saldo</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 mb-30">
+                <div class="card-box height-100-p widget-style1">
+                    <div class="d-flex flex-wrap align-items-center">
+                        <div class="progress-data">
+                            <div id="chart4"></div>
+                        </div>
+                        <div class="widget-data">
+                            <div class="h4 mb-0">2</div>
+                            <div class="weight-600 font-14">Jemput Sampah</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-box mb-30">
+            <h2 class="h4 pd-20">Best Selling Products</h2>
+            <table class="data-table table nowrap">
+                <thead>
+                <tr>
+                    <th class="table-plus datatable-nosort">Product</th>
+                    <th>Name</th>
+                    <th>Color</th>
+                    <th>Size</th>
+                    <th>Price</th>
+                    <th>Oty</th>
+                    <th class="datatable-nosort">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="table-plus">
+                        <img src="../vendors/images/product-1.jpg" width="70" height="70" alt="">
+                    </td>
+                    <td>
+                        <h5 class="font-16">Shirt</h5>
+                        by John Doe
+                    </td>
+                    <td>Black</td>
+                    <td>M</td>
+                    <td>$1000</td>
+                    <td>1</td>
+                    <td>
+                        <div class="dropdown">
+                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                <i class="dw dw-more"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
+                                <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
+                                <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table-plus">
+                        <img src="../vendors/images/product-2.jpg" width="70" height="70" alt="">
+                    </td>
+                    <td>
+                        <h5 class="font-16">Boots</h5>
+                        by Lea R. Frith
+                    </td>
+                    <td>brown</td>
+                    <td>9UK</td>
+                    <td>$900</td>
+                    <td>1</td>
+                    <td>
+                        <div class="dropdown">
+                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                <i class="dw dw-more"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
+                                <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
+                                <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table-plus">
+                        <img src="../vendors/images/product-3.jpg" width="70" height="70" alt="">
+                    </td>
+                    <td>
+                        <h5 class="font-16">Hat</h5>
+                        by Erik L. Richards
+                    </td>
+                    <td>Orange</td>
+                    <td>M</td>
+                    <td>$100</td>
+                    <td>4</td>
+                    <td>
+                        <div class="dropdown">
+                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                <i class="dw dw-more"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
+                                <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
+                                <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table-plus">
+                        <img src="../vendors/images/product-4.jpg" width="70" height="70" alt="">
+                    </td>
+                    <td>
+                        <h5 class="font-16">Long Dress</h5>
+                        by Renee I. Hansen
+                    </td>
+                    <td>Gray</td>
+                    <td>L</td>
+                    <td>$1000</td>
+                    <td>1</td>
+                    <td>
+                        <div class="dropdown">
+                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                <i class="dw dw-more"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
+                                <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
+                                <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table-plus">
+                        <img src="../vendors/images/product-5.jpg" width="70" height="70" alt="">
+                    </td>
+                    <td>
+                        <h5 class="font-16">Blazer</h5>
+                        by Vicki M. Coleman
+                    </td>
+                    <td>Blue</td>
+                    <td>M</td>
+                    <td>$1000</td>
+                    <td>1</td>
+                    <td>
+                        <div class="dropdown">
+                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                <i class="dw dw-more"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
+                                <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
+                                <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="footer-wrap pd-20 mb-20 card-box">
+            Bank Sampah Bumi Inspirasi Website by <a href="https://github.com/rizall135" target="_blank">Muhammad Rizal</a>
+        </div>
+    </div>
+</div>
+<!-- js -->
+<script src="../vendors/scripts/core.js"></script>
+<script src="../vendors/scripts/script.min.js"></script>
+<script src="../vendors/scripts/process.js"></script>
+<script src="../vendors/scripts/layout-settings.js"></script>
+<script src="../src/plugins/apexcharts/apexcharts.min.js"></script>
+<script src="../src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+<script src="../src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+<script src="../src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+<script src="../src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+<script src="../vendors/scripts/dashboard.js"></script>
+</body>
+</html>
+
+<!--
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    &lt;!&ndash; Meta, title, CSS, favicons, etc. &ndash;&gt;
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="images/favicon.ico" type="image/ico" />
+
+    <title>BANK SAMPAH BUMI INSPIRASI</title>
+
+    &lt;!&ndash; Bootstrap &ndash;&gt;
+    <link th:href="@{../vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
+    &lt;!&ndash; Font Awesome &ndash;&gt;
+    <link th:href="@{../vendors/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+    &lt;!&ndash; NProgress &ndash;&gt;
+    <link th:href="@{../vendors/nprogress/nprogress.css}" rel="stylesheet">
+    &lt;!&ndash; iCheck &ndash;&gt;
+    <link th:href="@{../vendors/iCheck/skins/flat/green.css}" rel="stylesheet">
+
+    &lt;!&ndash; bootstrap-progressbar &ndash;&gt;
+    <link th:href="@{../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css}" rel="stylesheet">
+    &lt;!&ndash; JQVMap &ndash;&gt;
+    <link th:href="@{../vendors/jqvmap/dist/jqvmap.min.css}" rel="stylesheet" />
+    &lt;!&ndash; bootstrap-daterangepicker &ndash;&gt;
+    <link th:href="@{../vendors/bootstrap-daterangepicker/daterangepicker.css}" rel="stylesheet">
+
+    &lt;!&ndash; Custom Theme Style &ndash;&gt;
+    <link th:href="@{../build/css/custom.min.css}" rel="stylesheet">
+</head>
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view mt-5">
+                <div class="navbar nav_title" style="border: 0;">
+                    <img class="rounded mx-auto d-block" src="images/favicon.ico" width="90" height="100" alt="">
+                </div>
+
+                <div class="clearfix"></div>
+
+                <br /><br /><br />
+
+                &lt;!&ndash; sidebar menu &ndash;&gt;
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                    <div class="menu_section" sec:authorize="hasAnyAuthority('KARYAWAN')">
+                        <h3>Dashboard</h3>
+                        <ul class="nav side-menu" style="font-size: 14px">
+                            <li><a th:href="@{/}"><i class="fa fa-home fa-4x"></i>  <span>HOME</span></a>
+                            </li>
+                            <li>
+                                <a th:href="@{/KARYAWAN/monitoring}">
+                                    <i class="fa fa-book fa-2x"></i><span>KELOLA CUTI</span>
+                                </a>
+                            </li>
+                            <li><a th:href="@{/KARYAWAN/pengajuan}"><i class="fa fa-clone fa-2x"></i> <span>PENGAJUAN CUTI</span></a>
+                            <li><a th:href="@{/KARYAWAN/libur}"><i class="fa fa-calendar-plus-o fa-2x"></i> <span>HARI LIBUR</span></a></li>
+                        </ul>
+                    </div>
+                    <div class="menu_section" sec:authorize="hasAnyAuthority('HRD')">
+                        <h3>Dashboard</h3>
+                        <ul class="nav side-menu" style="font-size: 14px">
+                            <li><a th:href="@{/}"><i class="fa fa-home fa-4x"></i>  <span>HOME</span></a>
+                            </li>
+                            <li>
+                                <a th:href="@{/HRD/masuk}">
+                                    <i class="fa fa-book fa-2x"></i><span>KELOLA CUTI KARYAWAN</span>
+                                </a>
+                            </li>
+                            <li><a th:href="@{/HRD/libur}"><i class="fa fa-calendar-plus-o fa-2x"></i> <span>DATA LIBUR</span></a></li>
+                            <li><a th:href="@{/HRD/karyawan}"><i class="fa fa-users fa-2x"></i> <span>DATA KARYAWAN</span></a></li>
+                            <li><a th:href="@{/HRD/recruitmen}"><i class="fa fa-user-plus fa-2x"></i> <span>RECRUITMEN</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    &lt;!&ndash; top navigation &ndash;&gt;
+    <div class="top_nav">
+        <div class="nav_menu">
+            <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+            <nav class="nav navbar-nav">
+                <ul class=" navbar-right">
+                    <li class="nav-item dropdown open" style="padding-left: 15px;">
+                        <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true"
+                           id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                            <img src="images/img.jpg" alt="">
+                            <span th:inline="text">[[${#httpServletRequest.remoteUser}]]</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-usermenu pull-right"
+                             aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" th:href="@{/setting}">Change Password</a>
+                            <a class="dropdown-item" th:href="@{/logout}"><i class="fa fa-sign-out pull-right"></i>
+                                Log Out</a>
+                        </div>
+                    </li>
+                </ul>
+                </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    &lt;!&ndash; /top navigation &ndash;&gt;
+    &lt;!&ndash;            karyawan&ndash;&gt;
+    &lt;!&ndash; page content &ndash;&gt;
+    <div class="right_col" role="main">
+        <div class="row tile_count" style="text-align: center;">
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count"></div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count"></div>
+        </div>
+
+        <div class="row top_tiles">
+            <div class="animated flipInY col-lg-3 col-md-3 col-sm-8 col-xs-14" sec:authorize="hasAnyAuthority('KARYAWAN')">
+                <div class="tile-stats">
+                    <div class="icon"><i class="fa fa-calendar-minus-o green"></i>
+                    </div>
+                    <div class="count" th:text="${Tahunan}"></div><br>
+                    <h4>&nbsp;CUTI TAHUNAN</h4>
+                    <p>Sisa Cuti Tahunan</p>
+                </div>
+            </div>
+
+            <div class="animated flipInY col-lg-3 col-md-3 col-sm-8 col-xs-14" sec:authorize="hasAnyAuthority('KARYAWAN')">
+                <div class="tile-stats">
+                    <div class="icon"><i class="fa fa-calendar-minus-o green"></i>
+                    </div>
+                    <div class="count" th:text="${Lintas}"></div><br>
+                    <h4>CUTI LINTAS TAHUN</h4>
+                    <p>Sisa Cuti Lintas Tahun</p>
+                </div>
+            </div>
+
+            &lt;!&ndash;            hrd&ndash;&gt;
+            <div class="animated flipInY col-lg-3 col-md-3 col-sm-8 col-xs-14" sec:authorize="hasAnyAuthority('HRD')">
+                <div class="tile-stats">
+                    <div class="icon"><i class="fa fa-users green"></i>
+                    </div>
+                    <div class="count" th:text="${total}"></div><br>
+                    <h5>JUMLAH PEGAWAI</h5>
+                    <p>Menampilkan Total Pegawai</p>
+                </div>
+            </div>
+
+            <div class="animated flipInY col-lg-3 col-md-3 col-sm-8 col-xs-14" sec:authorize="hasAnyAuthority('HRD')">
+                <div class="tile-stats">
+                    <div class="icon"><i class="fa fa-users green"></i>
+                    </div>
+                    <div class="count" th:text="${totalHrd}"></div><br>
+                    <h5>JUMLAH HRD</h5>
+                    <p>Menampilkan Total HRD</p>
+                </div>
+            </div>
+
+            <div class="animated flipInY col-lg-3 col-md-3 col-sm-8 col-xs-14" sec:authorize="hasAnyAuthority('HRD')">
+                <div class="tile-stats">
+                    <div class="icon"><i class="fa fa-users green"></i>
+                    </div>
+                    <div class="count" th:text="${totalKaryawan}"></div><br>
+                    <h5>JUMLAH KARYAWAN</h5>
+                    <p>Menampilkan Total Karyawan</p>
+                </div>
+            </div>
+
+            <div class="animated flipInY col-lg-3 col-md-3 col-sm-8 col-xs-14" sec:authorize="hasAnyAuthority('HRD')">
+                <div class="tile-stats">
+                    <div class="icon"><i class="fa fa-bell green"></i>
+                    </div>
+                    <div class="count" th:text="${cuti}"></div><br>
+                    <h5>CUTI MASUK</h5>
+                    <p>Menampilkan Cuti Masuk</p>
+                </div>
+            </div>
+
+        </div><br><br><br><br><br><br>
+        <h1 style="text-align: center;">SELAMAT DATANG <span sec:authentication="principal.authorities"/></h1>
+    </div>
+
+    &lt;!&ndash; jQuery &ndash;&gt;
+    <script th:src="@{../vendors/jquery/dist/jquery.min.js}"></script>
+    &lt;!&ndash; Bootstrap &ndash;&gt;
+    <script th:src="@{../vendors/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+    &lt;!&ndash; FastClick &ndash;&gt;
+    <script th:src="@{../vendors/fastclick/lib/fastclick.js}"></script>
+    &lt;!&ndash; NProgress &ndash;&gt;
+    <script th:src="@{../vendors/nprogress/nprogress.js}"></script>
+    &lt;!&ndash; Chart.js &ndash;&gt;
+    <script th:src="@{../vendors/Chart.js/dist/Chart.min.js}"></script>
+    &lt;!&ndash; gauge.js &ndash;&gt;
+    <script th:src="@{../vendors/gauge.js/dist/gauge.min.js}"></script>
+    &lt;!&ndash; bootstrap-progressbar &ndash;&gt;
+    <script th:src="@{../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js}"></script>
+    &lt;!&ndash; iCheck &ndash;&gt;
+    <script th:src="@{../vendors/iCheck/icheck.min.js}"></script>
+    &lt;!&ndash; Skycons &ndash;&gt;
+    <script th:src="@{../vendors/skycons/skycons.js}"></script>
+    &lt;!&ndash; Flot &ndash;&gt;
+    <script th:src="@{../vendors/Flot/jquery.flot.js}"></script>
+    <script th:src="@{../vendors/Flot/jquery.flot.pie.js}"></script>
+    <script th:src="@{../vendors/Flot/jquery.flot.time.js}"></script>
+    <script th:src="@{../vendors/Flot/jquery.flot.stack.js}"></script>
+    <script th:src="@{../vendors/Flot/jquery.flot.resize.js}"></script>
+    &lt;!&ndash; Flot plugins &ndash;&gt;
+    <script th:src="@{../vendors/flot.orderbars/js/jquery.flot.orderBars.js}"></script>
+    <script th:src="@{../vendors/flot-spline/js/jquery.flot.spline.min.js}"></script>
+    <script th:src="@{../vendors/flot.curvedlines/curvedLines.js}"></script>
+    &lt;!&ndash; DateJS &ndash;&gt;
+    <script th:src="@{../vendors/DateJS/build/date.js}"></script>
+    &lt;!&ndash; JQVMap &ndash;&gt;
+    <script th:src="@{../vendors/jqvmap/dist/jquery.vmap.js}"></script>
+    <script th:src="@{../vendors/jqvmap/dist/maps/jquery.vmap.world.js}"></script>
+    <script th:src="@{../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js}"></script>
+    &lt;!&ndash; bootstrap-daterangepicker &ndash;&gt;
+    <script th:src="@{../vendors/moment/min/moment.min.js}"></script>
+    <script th:src="@{../vendors/bootstrap-daterangepicker/daterangepicker.js}"></script>
+
+    &lt;!&ndash; Custom Theme Scripts &ndash;&gt;
+    <script th:src="@{../build/js/custom.min.js}"></script>
+
+</body>
+
+</html>-->

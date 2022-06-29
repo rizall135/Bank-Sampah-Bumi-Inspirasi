@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../../images/favicon.ico" type="image/ico" />
+
+    <title>BANK SAMPAH BUMI INSPIRASI</title>
+
+    <!-- Bootstrap -->
+    <link th:href="@{../../vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link th:href="@{../../vendors/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+    <!-- NProgress -->
+    <link th:href="@{../../vendors/nprogress/nprogress.css}" rel="stylesheet">
+    <!-- iCheck -->
+    <link th:href="@{../../vendors/iCheck/skins/flat/green.css}" rel="stylesheet">
+
+    <!-- bootstrap-progressbar -->
+    <link th:href="@{../../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css}" rel="stylesheet">
+    <!-- JQVMap -->
+    <link th:href="@{../../vendors/jqvmap/dist/jqvmap.min.css}" rel="stylesheet" />
+    <!-- bootstrap-daterangepicker -->
+    <link th:href="@{../../vendors/bootstrap-daterangepicker/daterangepicker.css}" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link th:href="@{../../build/css/custom.min.css}" rel="stylesheet">
+</head>
+
+<body class="nav-md">
+<div class="container body" sec:authorize="isAuthenticated()">
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view mt-5">
+                <div class="navbar nav_title" style="border: 0;">
+                    <img class="rounded mx-auto d-block" src="../../images/favicon.ico" width="90" height="100" alt="">
+                </div>
+
+                <div class="clearfix"></div>
+
+                <br /><br /><br />
+                <!-- sidebar menu -->
+                <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                    <div class="menu_section" sec:authorize="hasAnyAuthority('HRD')">
+                        <h3>Dashboard</h3>
+                        <ul class="nav side-menu" style="font-size: 14px">
+                            <li><a th:href="@{/}"><i class="fa fa-home fa-4x"></i>  <span>HOME</span></a>
+                            </li>
+                            <li>
+                                <a th:href="@{/HRD/masuk}">
+                                    <i class="fa fa-book fa-2x"></i><span>KELOLA CUTI KARYAWAN</span>
+                                </a>
+                            </li>
+                            <li><a th:href="@{/HRD/libur}"><i class="fa fa-calendar-plus-o fa-2x"></i> <span>DATA LIBUR</span></a></li>
+                            <li><a th:href="@{/HRD/karyawan}"><i class="fa fa-users fa-2x"></i> <span>DATA KARYAWAN</span></a></li>
+                            <li><a th:href="@{/HRD/recruitmen}"><i class="fa fa-user-plus fa-2x"></i> <span>RECRUITMEN</span></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="menu_section" sec:authorize="hasAnyAuthority('KARYAWAN')">
+                        <h3>Dashboard</h3>
+                        <ul class="nav side-menu" style="font-size: 14px">
+                            <li><a th:href="@{/}"><i class="fa fa-home fa-4x"></i>  <span>HOME</span></a>
+                            </li>
+                            <li>
+                                <a th:href="@{/KARYAWAN/monitoring}">
+                                    <i class="fa fa-book fa-2x"></i><span>KELOLA CUTI</span>
+                                </a>
+                            </li>
+                            <li><a th:href="@{/KARYAWAN/pengajuan}"><i class="fa fa-clone fa-2x"></i> <span>PENGAJUAN CUTI</span></a>
+                            <li><a th:href="@{/KARYAWAN/libur}"><i class="fa fa-calendar-plus-o fa-2x"></i> <span>HARI LIBUR</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- top navigation -->
+    <div class="top_nav">
+        <div class="nav_menu">
+            <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+            <nav class="nav navbar-nav">
+                <ul class=" navbar-right">
+                    <li class="nav-item dropdown open" style="padding-left: 15px;">
+                        <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true"
+                           id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                            <img src="../../images/img.jpg" alt="">
+                            <span th:inline="text">[[${#httpServletRequest.remoteUser}]]</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
+
+                            <div sec:authorize="hasAnyAuthority('KARYAWAN')">
+                                <a class="dropdown-item" th:href="@{/KARYAWAN/setting}">Change Password</a>
+                            </div>
+
+                            <div sec:authorize="hasAnyAuthority('HRD')">
+                                <a class="dropdown-item" th:href="@{/HRD/setting}">Change Password</a>
+                            </div>
+
+                            <a class="dropdown-item" th:href="@{/logout}"><i class="fa fa-sign-out pull-right"></i>
+                            Log Out</a>
+                        </div>
+                    </li>
+                </ul>
+                </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- /top navigation -->
+
+    <!-- page content -->
+    <div class="right_col" role="main">
+        <div class="">
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>DETAIL CUTI</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="card">
+                                <h5 class="card-header text-center">FORMULIR PENGAJUAN CUTI KARYAWAN</h5>
+                                <div class="card-body">
+                                    <table class="card-text table table-borderless text-left">
+                                        <th:block th:each="data:${detail}">
+                                            <tr class="text-left">
+                                                <td>Nama</td>
+                                                <td>:&nbsp;&nbsp;[[${data.pengajuanCuti.employee.nama}]]</td>
+                                            </tr>
+                                            <tr class="text-left">
+                                                <td>Nip</td>
+                                                <td>:&nbsp;&nbsp;[[${data.pengajuanCuti.employee.nip}]]</td>
+                                            </tr>
+                                            <tr class="text-left">
+                                                <td>Divisi</td>
+                                                <td>:&nbsp;&nbsp;[[${data.pengajuanCuti.employee.divisi}]]</td>
+                                            </tr>
+                                            <tr class="text-left">
+                                                <td>No Telp</td>
+                                                <td>:&nbsp;&nbsp;[[${data.pengajuanCuti.noTelp}]]</td>
+                                            </tr>
+                                            <tr class="text-left">
+                                                <td>Alamat</td>
+                                                <td>:&nbsp;&nbsp;[[${data.pengajuanCuti.alamat}]]</td>
+                                            </tr>
+                                            <tr class="text-left">
+                                                <td>Tanggal Cuti</td>
+                                                <td>:&nbsp;&nbsp;[[${#dates.format(data.tanggal, 'dd-MMM-yyyy')}]]</td>
+                                            </tr>
+                                            <tr class="text-left">
+                                                <td>Lama Cuti</td>
+                                                <td>:&nbsp;&nbsp;[[${data.pengajuanCuti.lama_cuti}]] hari</td>
+                                            </tr>
+                                            <tr class="text-left">
+                                                <td>Keterangan</td>
+                                                <td>:&nbsp;&nbsp;[[${data.pengajuanCuti.keterangan}]]</td>
+                                            </tr>
+                                        </th:block>
+                                    </table>
+                                    <div sec:authorize="hasAnyAuthority('HRD')">
+                                        <a th:href="@{/HRD/masuk}" class="btn btn-danger">Kembali</a>
+                                    </div>
+                                    <div sec:authorize="hasAnyAuthority('KARYAWAN')">
+                                        <a th:href="@{/KARYAWAN/monitoring}" class="btn btn-danger">Kembali</a>
+                                        <a th:href="@{'/KARYAWAN/cetak/'+${detail.detail_pengajuan_cuti_id}}" class="btn btn-primary">Cetak Pdf</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- /footer content -->
+    <script src="../../dist/sweetalert2.all.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="../../vendors/validator/multifield.js"></script>
+    <script src="../../vendors/validator/validator.js"></script>
+
+    <!-- Javascript functions	-->
+    <script>
+        function hideshow() {
+            var password = document.getElementById("password1");
+            var slash = document.getElementById("slash");
+            var eye = document.getElementById("eye");
+
+            if (password.type === 'password') {
+                password.type = "text";
+                slash.style.display = "block";
+                eye.style.display = "none";
+            }
+            else {
+                password.type = "password";
+                slash.style.display = "none";
+                eye.style.display = "block";
+            }
+
+        }
+    </script>
+
+    <script>
+        // initialize a validator instance from the "FormValidator" constructor.
+        // A "<form>" element is optionally passed as an argument, but is not a must
+        var validator = new FormValidator({
+            "events": ['blur', 'input', 'change']
+        }, document.forms[0]);
+        // on form "submit" event
+        document.forms[0].onsubmit = function (e) {
+            var submit = true,
+                validatorResult = validator.checkAll(this);
+            if(validatorResult.valid === true){
+                Swal.fire('Saved!', '', 'success');
+            }
+            console.log(validatorResult);
+            return !!validatorResult.valid;
+        };
+        // on form "reset" event
+        document.forms[0].onreset = function (e) {
+            validator.reset();
+        };
+        // stuff related ONLY for this demo page:
+        $('.toggleValidationTooltips').change(function () {
+            validator.settings.alerts = !this.checked;
+            if (this.checked)
+                $('form .alert').remove();
+        }).prop('checked', false);
+
+    </script>
+
+    <!-- jQuery -->
+    <script src="../../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- FastClick -->
+    <script src="../../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../../vendors/nprogress/nprogress.js"></script>
+    <!-- validator -->
+    <!-- <script src="../vendors/validator/validator.js"></script> -->
+
+    <!-- Custom Theme Scripts -->
+    <script src="../../build/js/custom.min.js"></script>
+
+</body>
+
+</html>
